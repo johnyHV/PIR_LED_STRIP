@@ -23,7 +23,7 @@ uint8_t IR_Scan() {
   decode_results results;
 
   if (IR_rx.decode(&results)) {
-    Serial.print("IR button HEX code: ");
+    Serial.print(F("IR button HEX code: "));
     Serial.println(results.value, HEX);
     IR_rx.resume();
     IR_CheckButton(&results);

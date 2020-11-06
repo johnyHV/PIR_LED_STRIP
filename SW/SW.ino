@@ -28,7 +28,7 @@ void setup() {
   Timer1.initialize(1000000);       ///< Nastavenie casovaca na dlzku 100000 microseconds
   Timer1.attachInterrupt(timerIsr); ///< attach funkcie pre prerusenie 
 
-  Serial.println("Start MCU!");
+  Serial.println(F("Start MCU!"));
 }
 
 void loop() {
@@ -37,14 +37,14 @@ void loop() {
 
   /* kontrola detekcie pohybu z PIR senzora, a kontrola zapnuta detekcie pohybu cez IR dialkove ovladanie */
   if ((PIR_CheckStatus() == true) && (EnablePir == true)) {
-    Serial.print("Motion detection! ");
+    Serial.println(F("Motion detection! "));
     TimerCounter = 0;
     StartStripOn = true;
   }
 
   /* kontrola zapnutia LED pasu */
   if ((StartStripOn == true) && (LedStripStatus == false)) {
-    Serial.println("Strip ON");
+    Serial.println(F("Strip ON"));
     LED_StripOn();
     LED_ShelfOneOn();
     LED_ShelfTwoOn();
@@ -54,7 +54,7 @@ void loop() {
 
   /* kontrola vyprsania timeoutu, a vypnutie LED pasu */
   if ((TimerCounter >= LED_STRIP_TIMEOUT) && (LedStripStatus == true)) {
-    Serial.println("Strip OFF");
+    Serial.println(F("Strip OFF"));
     LED_ShelfTwoOff();
     LED_ShelfOneOff();
     LED_StripOff();
@@ -68,8 +68,8 @@ void loop() {
 /// --------------------------
 void timerIsr() {
   TimerCounter++;
-  //Serial.print("ISR: ");
-  //Serial.println(TimerCounter);
+  Serial.print(F("ISR: "));
+  Serial.println(TimerCounter);
 }
 
 /* EOF */
